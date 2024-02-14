@@ -1,0 +1,2 @@
+client=org.citrusframework.jmx.config.annotation.JmxClientConfigParser
+server=org.citrusframework.jmx.config.annotation.JmxServerConfigParser

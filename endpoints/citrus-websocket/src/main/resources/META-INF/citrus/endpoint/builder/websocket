@@ -1,0 +1,2 @@
+client=org.citrusframework.websocket.client.WebSocketClientBuilder
+server=org.citrusframework.websocket.server.WebSocketServerBuilder

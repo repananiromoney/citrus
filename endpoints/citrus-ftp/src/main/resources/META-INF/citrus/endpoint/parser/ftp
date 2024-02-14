@@ -1,0 +1,2 @@
+client=org.citrusframework.ftp.config.annotation.FtpClientConfigParser
+server=org.citrusframework.ftp.config.annotation.FtpServerConfigParser

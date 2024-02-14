@@ -1,0 +1,56 @@
+<bindings xmlns="https://jakarta.ee/xml/ns/jaxb"
+          xmlns:xs="http://www.w3.org/2001/XMLSchema"
+          xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+          version="3.0">
+
+  <globalBindings>
+    <javaType
+            name="java.util.Calendar"
+            xmlType="xs:dateTime"
+            parseMethod="jakarta.xml.bind.DatatypeConverter.parseDateTime"
+            printMethod="jakarta.xml.bind.DatatypeConverter.printDateTime" />
+    <javaType
+            name="java.util.Calendar"
+            xmlType="xs:date"
+            parseMethod="jakarta.xml.bind.DatatypeConverter.parseDate"
+            printMethod="jakarta.xml.bind.DatatypeConverter.printDate" />
+    <xjc:simple />
+  </globalBindings>
+
+  <bindings schemaLocation="org/citrusframework/schema/citrus-config.xsd">
+    <schemaBindings>
+      <package name="org.citrusframework.model.config.core"/>
+      <nameXmlTransform>
+        <elementName suffix="Model" />
+      </nameXmlTransform>
+    </schemaBindings>
+  </bindings>
+
+  <bindings schemaLocation="org/citrusframework/schema/citrus-testcase.xsd">
+    <schemaBindings>
+      <package name="org.citrusframework.model.testcase.core"/>
+      <nameXmlTransform>
+        <elementName suffix="Model" />
+      </nameXmlTransform>
+    </schemaBindings>
+    <bindings node="//xs:complexType[@name='ReceiveActionType']/xs:sequence/xs:element[@name='selector']">
+      <bindings node=".//xs:element[@name='value']">
+        <property name="SelectorValue"/>
+      </bindings>
+    </bindings>
+    <bindings node="//xs:complexType[@name='PurgeEndpointActionType']/xs:sequence/xs:element[@name='selector']">
+      <bindings node=".//xs:element[@name='value']">
+        <property name="SelectorValue"/>
+      </bindings>
+    </bindings>
+    <bindings node="//xs:element[@name='variables']/xs:complexType/xs:sequence/xs:element[@name='variable']/xs:complexType/xs:sequence/xs:element[@name='value']">
+      <property name="VariableValue"/>
+    </bindings>
+    <bindings node="//xs:complexType[@name='CreateVariablesActionType']/xs:sequence/xs:element[@name='variable']/xs:complexType/xs:sequence/xs:element[@name='value']">
+      <property name="CreateVariableValue"/>
+    </bindings>
+    <bindings node="//xs:element[@name='parameter']/xs:complexType/xs:sequence/xs:element[@name='value']">
+      <property name="ParameterValue"/>
+    </bindings>
+  </bindings>
+</bindings>

@@ -1,0 +1,2 @@
+async=org.citrusframework.vertx.config.annotation.VertxEndpointConfigParser
+sync=org.citrusframework.vertx.config.annotation.VertxSyncEndpointConfigParser

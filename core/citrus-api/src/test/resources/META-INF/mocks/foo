@@ -1,0 +1,2 @@
+name=fooMock
+type=org.citrusframework.spi.mocks.Foo

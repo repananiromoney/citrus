@@ -1,0 +1,2 @@
+client=org.citrusframework.ftp.client.FtpClientBuilder
+server=org.citrusframework.ftp.server.FtpServerBuilder

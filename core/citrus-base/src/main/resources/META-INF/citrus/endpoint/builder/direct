@@ -1,0 +1,4 @@
+async=org.citrusframework.endpoint.direct.DirectEndpointBuilder
+asynchronous=org.citrusframework.endpoint.direct.DirectEndpointBuilder
+sync=org.citrusframework.endpoint.direct.DirectSyncEndpointBuilder
+synchronous=org.citrusframework.endpoint.direct.DirectSyncEndpointBuilder

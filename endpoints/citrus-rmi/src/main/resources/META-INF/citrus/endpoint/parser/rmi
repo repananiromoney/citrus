@@ -1,0 +1,2 @@
+client=org.citrusframework.rmi.config.annotation.RmiClientConfigParser
+server=org.citrusframework.rmi.config.annotation.RmiServerConfigParser

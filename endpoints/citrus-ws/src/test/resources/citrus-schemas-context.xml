@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:citrus="http://www.citrusframework.org/schema/config"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.citrusframework.org/schema/config http://www.citrusframework.org/schema/config/citrus-config.xsd">
+
+  <citrus:schema-repository id="imageServiceSchemaRepository">
+    <citrus:schemas>
+      <citrus:schema id="imageServiceSchema" location="classpath:org/citrusframework/schema/ImageService.wsdl" />
+    </citrus:schemas>
+  </citrus:schema-repository>
+
+  <citrus:schema-repository id="sampleServiceSchemaRepository">
+    <citrus:schemas>
+      <citrus:schema id="sampleServiceSchema" location="classpath:org/citrusframework/schema/SampleServiceWithImports.wsdl" />
+    </citrus:schemas>
+  </citrus:schema-repository>
+
+  <citrus:schema-repository id="sampleServiceSchemaNamespaceDiffRepository">
+    <citrus:schemas>
+      <citrus:schema id="sampleServiceSchemaNamespaceDiff" location="classpath:org/citrusframework/schema/SampleServiceWithImportsNamespaceDiff.wsdl" />
+    </citrus:schemas>
+  </citrus:schema-repository>
+
+</beans>

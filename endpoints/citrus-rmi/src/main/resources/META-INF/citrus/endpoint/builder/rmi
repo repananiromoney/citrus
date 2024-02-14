@@ -1,0 +1,2 @@
+client=org.citrusframework.rmi.client.RmiClientBuilder
+server=org.citrusframework.rmi.server.RmiServerBuilder

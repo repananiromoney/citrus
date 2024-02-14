@@ -1,0 +1,2 @@
+async=org.citrusframework.config.annotation.ChannelEndpointConfigParser
+sync=org.citrusframework.config.annotation.ChannelSyncEndpointConfigParser

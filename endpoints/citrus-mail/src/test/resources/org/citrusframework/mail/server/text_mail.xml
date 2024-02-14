@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mail-message xmlns="http://www.citrusframework.org/schema/mail/message">
+  <from>foo@mail.com</from>
+  <to>bar@mail.com,copy@mail.com</to>
+  <cc>foobar@mail.com</cc>
+  <bcc>secret@mail.com</bcc>
+  <subject>Testmail</subject>
+  <body>
+    <contentType>text/plain</contentType>
+    <content>Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</content>
+  </body>
+</mail-message>

@@ -1,0 +1,20 @@
+name: Citrus
+description: Add Citrus support to your Quarkus tests. Citrus is an Open Source Java integration testing framework supporting a wide range of message protocols and data formats (Kafka, Http REST, JMS, TCP/IP, SOAP, FTP/SFTP, XML, Json, and more)
+metadata:
+  shortname: citrus
+  keywords:
+    - testing
+    - citrus
+    - messaging
+    - rest
+    - soap
+    - kafka
+    - jms
+    - bdd
+  guide: https://github.com/christophd/citrus-demo-quarkus
+  icon-url: https://citrusframework.org/img/citrus.png
+  categories:
+    - "testing"
+    - "messaging"
+    - "integration"
+  status: "preview"

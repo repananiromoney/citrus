@@ -1,0 +1,1 @@
+client=org.citrusframework.ftp.config.annotation.ScpClientConfigParser

@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>citrus</artifactId>
+    <groupId>org.citrusframework</groupId>
+    <version>4.2.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>citrus-endpoints</artifactId>
+  <name>Citrus :: Endpoints</name>
+  <description>Citrus endpoints for producing and consuming messages</description>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>citrus-spring-integration</module>
+    <module>citrus-camel</module>
+    <module>citrus-ftp</module>
+    <module>citrus-http</module>
+    <module>citrus-jms</module>
+    <module>citrus-jmx</module>
+    <module>citrus-kafka</module>
+    <module>citrus-mail</module>
+    <module>citrus-rmi</module>
+    <module>citrus-ssh</module>
+    <module>citrus-websocket</module>
+    <module>citrus-ws</module>
+    <module>citrus-vertx</module>
+    <module>citrus-zookeeper</module>
+  </modules>
+
+</project>
+

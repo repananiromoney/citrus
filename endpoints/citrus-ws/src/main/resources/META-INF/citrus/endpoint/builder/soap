@@ -1,0 +1,2 @@
+client=org.citrusframework.ws.client.WebServiceClientBuilder
+server=org.citrusframework.ws.server.WebServiceServerBuilder

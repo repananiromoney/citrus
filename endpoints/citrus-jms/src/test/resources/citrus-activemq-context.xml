@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!-- Embedded ActiveMQ JMS broker -->
+  <bean class="org.apache.activemq.artemis.core.server.embedded.EmbeddedActiveMQ" init-method="start" destroy-method="stop">
+    <property name="SecurityManager" ref="securityManager"/>
+  </bean>
+
+  <bean id="connectionFactory" class="org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory">
+    <property name="brokerURL" value="tcp://localhost:61616"/>
+  </bean>
+
+  <bean id="securityManager" class="org.apache.activemq.artemis.spi.core.security.ActiveMQJAASSecurityManager">
+    <constructor-arg value="org.apache.activemq.artemis.spi.core.security.jaas.InVMLoginModule"/>
+    <constructor-arg>
+      <bean class="org.apache.activemq.artemis.core.config.impl.SecurityConfiguration">
+        <constructor-arg name="users">
+          <map>
+            <entry key="citrus" value="citrus"/>
+          </map>
+        </constructor-arg>
+        <constructor-arg name="roles">
+          <map>
+            <entry key="citrus">
+              <list>
+                <value>citrus</value>
+              </list>
+            </entry>
+          </map>
+        </constructor-arg>
+        <property name="DefaultUser" value="citrus"/>
+      </bean>
+    </constructor-arg>
+  </bean>
+
+</beans>

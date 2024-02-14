@@ -1,0 +1,4 @@
+async=org.citrusframework.vertx.endpoint.VertxEndpointBuilder
+asynchronous=org.citrusframework.vertx.endpoint.VertxEndpointBuilder
+sync=org.citrusframework.vertx.endpoint.VertxSyncEndpointBuilder
+synchronous=org.citrusframework.vertx.endpoint.VertxSyncEndpointBuilder

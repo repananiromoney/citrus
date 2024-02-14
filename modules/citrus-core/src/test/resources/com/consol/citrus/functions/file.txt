@@ -1,2 +1,0 @@
-This is a sample file content!
-We can also use variables '${user}' and functions citrus:currentDate()

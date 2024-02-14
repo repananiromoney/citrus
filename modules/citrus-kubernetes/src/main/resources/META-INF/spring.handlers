@@ -1,2 +1,0 @@
-http\://www.citrusframework.org/schema/kubernetes/testcase=com.consol.citrus.kubernetes.config.handler.CitrusKubernetesTestcaseNamespaceHandler
-http\://www.citrusframework.org/schema/kubernetes/config=com.consol.citrus.kubernetes.config.handler.CitrusKubernetesConfigNamespaceHandler

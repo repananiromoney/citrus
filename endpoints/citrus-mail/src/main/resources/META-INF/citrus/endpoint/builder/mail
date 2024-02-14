@@ -1,0 +1,2 @@
+client=org.citrusframework.mail.client.MailClientBuilder
+server=org.citrusframework.mail.server.MailServerBuilder

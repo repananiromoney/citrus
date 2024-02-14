@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:citrus="http://www.citrusframework.org/schema/config"
+       xmlns:citrus-jms="http://www.citrusframework.org/schema/jms/config"
+       xmlns:citrus-jms-test="http://www.citrusframework.org/schema/jms/testcase"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                         http://www.citrusframework.org/schema/config http://www.citrusframework.org/schema/config/citrus-config.xsd
+                         http://www.citrusframework.org/schema/jms/config http://www.citrusframework.org/schema/jms/config/citrus-jms-config.xsd
+                         http://www.citrusframework.org/schema/jms/testcase http://www.citrusframework.org/schema/jms/testcase/citrus-jms-testcase.xsd">
+
+  <import resource="classpath:citrus-activemq-context.xml"/>
+  <import resource="classpath:org/citrusframework/service/hello-service-context.xml"/>
+
+  <context:property-placeholder location="classpath:citrus.properties"
+                                ignore-unresolvable="true"/>
+
+  <!-- Global variables -->
+  <citrus:global-variables>
+    <citrus:variable name="project.name" value="Citrus JMS Integration Testing"/>
+  </citrus:global-variables>
+
+  <!-- Xsd schema resources and definitions -->
+  <citrus:schema id="helloSchema" location="classpath:schemas/HelloService.xsd" />
+  <citrus:schema id="soapSchema" location="classpath:schemas/soap-1.1.xsd"/>
+
+  <citrus:schema-repository id="helloSchemaRepository">
+    <citrus:schemas>
+      <citrus:reference schema="soapSchema" />
+      <citrus:reference schema="helloSchema" />
+    </citrus:schemas>
+  </citrus:schema-repository>
+
+  <!-- Default namespace mappings used in XPath expression evaluations -->
+  <citrus:namespace-context>
+    <citrus:namespace prefix="hs" uri="http://citrusframework.org/schemas/samples/HelloService.xsd"/>
+  </citrus:namespace-context>
+
+  <!-- Test Listeners -->
+  <bean class="org.citrusframework.report.MessageTracingTestListener"/>
+
+  <bean id="soapMessageConverter" class="org.citrusframework.jms.message.SoapJmsMessageConverter"/>
+
+  <!-- JMS message endpoints -->
+  <citrus-jms:endpoint id="helloServiceJmsEndpoint"
+                       destination-name="Citrus.HelloService.Request.Queue"
+                       timeout="${default.timeout}"/>
+
+  <citrus-jms:endpoint id="helloServiceResponseJmsEndpoint"
+                       destination-name="Citrus.HelloService.Response.Queue"
+                       timeout="${default.timeout}"/>
+
+  <citrus-jms:endpoint id="helloServiceSoapJmsEndpoint"
+                       destination-name="Citrus.HelloSoapService.Request.Queue"
+                       message-converter="soapMessageConverter"
+                       timeout="${default.timeout}"/>
+
+  <citrus-jms:endpoint id="helloServiceResponseSoapJmsEndpoint"
+                       destination-name="Citrus.HelloSoapService.Response.Queue"
+                       message-converter="soapMessageConverter"
+                       timeout="${default.timeout}"/>
+
+  <citrus-jms:endpoint id="helloSoapServiceJmsEndpoint"
+                       destination-name="Citrus.HelloSoapService.Request.Queue"
+                       timeout="${default.timeout}"/>
+
+  <citrus-jms:endpoint id="helloSoapServiceResponseJmsEndpoint"
+                       destination-name="Citrus.HelloSoapService.Response.Queue"
+                       timeout="${default.timeout}"/>
+
+  <citrus-jms:sync-endpoint id="helloServiceJmsSyncEndpoint"
+                       destination-name="Citrus.HelloService.InOut.Queue"
+                       timeout="${default.timeout}"/>
+
+  <citrus-jms:endpoint id="helloServiceJmsTopicEndpoint"
+                       connection-factory="topicConnectionFactory"
+                       destination-name="Citrus.HelloService.Request.Topic"
+                       timeout="${default.timeout}"
+                       pub-sub-domain="true"/>
+
+  <citrus-jms:endpoint id="helloServiceJmsTopicSubscriberEndpoint"
+                       connection-factory="topicConnectionFactory"
+                       destination-name="Citrus.HelloService.Topic"
+                       timeout="${default.timeout}"
+                       auto-start="true"
+                       pub-sub-domain="true"/>
+
+  <citrus-jms:endpoint id="helloServiceJmsTopicDurableSubscriberEndpoint"
+                       connection-factory="topicDurableConnectionFactory"
+                       destination-name="Citrus.HelloService.Durable.Topic"
+                       timeout="${default.timeout}"
+                       auto-start="true"
+                       durable-subscription="true"
+                       pub-sub-domain="true"/>
+
+  <!-- Citrus JMS Endpoints -->
+  <citrus-jms:endpoint id="helloTopicRequestSender"
+                       connection-factory="topicConnectionFactory"
+                       destination-name="${jms.topic.hello.request}"
+                       pub-sub-domain="true"/>
+
+  <citrus-jms:endpoint id="helloTopicRequestReceiver"
+                       connection-factory="topicConnectionFactory"
+                       timeout="5000"
+                       destination-name="${jms.topic.hello.request}"
+                       pub-sub-domain="true"/>
+
+  <citrus-jms:sync-endpoint id="syncJmsTopicEndpoint"
+                            connection-factory="topicConnectionFactory"
+                            destination-name="${jms.topic.hello.sync.request}"
+                            timeout="5000"
+                            pub-sub-domain="true"/>
+
+  <citrus-jms:sync-endpoint id="syncJmsTopicSubscriberEndpoint"
+                            connection-factory="topicConnectionFactory"
+                            timeout="5000"
+                            destination-name="${jms.topic.hello.sync.request}"
+                            pub-sub-domain="true"/>
+
+  <citrus-jms:sync-endpoint id="syncGetDateRequestSender"
+                            destination-name="${jms.queue.date.sync.request}"
+                            timeout="5000"/>
+
+  <citrus-jms:sync-endpoint id="syncGetDateRequestReceiver"
+                            timeout="5000"
+                            destination-name="${jms.queue.date.sync.request}"/>
+
+  <citrus-jms:endpoint id="testMessageSender" destination-name="${jms.queue.test}"/>
+
+  <citrus-jms:endpoint id="testMessageReceiver" destination-name="${jms.queue.test}"/>
+
+  <citrus-jms:endpoint id="dummyMessageReceiver" destination-name="${jms.queue.test}"/>
+
+  <bean id="testQueue1" class="org.apache.activemq.artemis.jms.client.ActiveMQQueue">
+    <constructor-arg index="0" value="Citrus.TestQueue1"/>
+  </bean>
+  <bean id="testQueue2" class="org.apache.activemq.artemis.jms.client.ActiveMQQueue">
+    <constructor-arg index="0" value="Citrus.TestQueue2"/>
+  </bean>
+  <bean id="testQueue3" class="org.apache.activemq.artemis.jms.client.ActiveMQQueue">
+    <constructor-arg index="0" value="Citrus.TestQueue3"/>
+  </bean>
+
+  <bean id="topicConnectionFactory" class="org.apache.activemq.artemis.jms.client.ActiveMQTopicConnectionFactory">
+    <property name="brokerURL" value="${jms.broker.url}" />
+  </bean>
+
+  <bean id="topicDurableConnectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+    <constructor-arg>
+      <bean class="org.apache.activemq.artemis.jms.client.ActiveMQTopicConnectionFactory">
+        <property name="brokerURL" value="${jms.broker.url}" />
+        <property name="clientID" value="citrusDurableConnectionFactory"/>
+      </bean>
+    </constructor-arg>
+  </bean>
+
+  <citrus:before-test id="defaultBeforeTest">
+    <citrus:actions>
+      <citrus-jms-test:purge-jms-queues connection-factory="connectionFactory" timeout="10">
+        <citrus-jms-test:queue name="Citrus.HelloService.Request.Queue"/>
+        <citrus-jms-test:queue name="Citrus.HelloService.Response.Queue"/>
+        <citrus-jms-test:queue name="Citrus.HelloService.InOut.Queue"/>
+        <citrus-jms-test:queue name="Citrus.HelloSoapService.Request.Queue"/>
+        <citrus-jms-test:queue name="Citrus.HelloSoapService.Response.Queue"/>
+        <citrus-jms-test:queue name="${jms.queue.date.sync.request}"/>
+        <citrus-jms-test:queue name="${jms.queue.test}"/>
+        <citrus-jms-test:queue ref="testQueue1"/>
+        <citrus-jms-test:queue ref="testQueue2"/>
+        <citrus-jms-test:queue ref="testQueue3"/>
+      </citrus-jms-test:purge-jms-queues>
+    </citrus:actions>
+  </citrus:before-test>
+
+</beans>

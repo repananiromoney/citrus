@@ -1,0 +1,1 @@
+browser=org.citrusframework.selenium.endpoint.SeleniumBrowserBuilder
