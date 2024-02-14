@@ -439,7 +439,7 @@ public class TestContext {
      * @param cause
      * @return
      */
-    public CitrusRuntimeException handleError(String testName, String packageName, String message, Exception cause) {
+    public RuntimeException handleError(String testName, String packageName, String message, Exception cause) {
         // Create empty dummy test case for logging purpose
         TestCase dummyTest = new TestCase();
         dummyTest.setName(testName);
@@ -452,7 +452,7 @@ public class TestContext {
         testListeners.onTestFailure(dummyTest, exception);
         testListeners.onTestFinish(dummyTest);
 
-        return exception;
+        return new RuntimeException(cause);
     }
 
     /**
